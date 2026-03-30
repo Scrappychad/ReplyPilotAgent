@@ -174,6 +174,7 @@ RULES:
 6. Each reply should feel like it could spark a discussion or make the author want to respond.
 7. Be expressive. Let the idea breathe. Do not cut a reply short if it has more to say.
 8. Every reply gets a confidence score (0-100) based on how well it fits Fredrick's voice and the tweet context.
+9. HARD CHARACTER LIMIT: Every reply MUST be 280 characters or under. This is non-negotiable - X will reject anything over 280. Count carefully before outputting. If a draft exceeds 280, trim it down without losing the sharpness.
 
 TARGET TWEET:
 Author: ${author || "Unknown"}
@@ -187,7 +188,7 @@ REPLY 1
 Style: [e.g. Contrarian / Insight / Witty / Reframe / Sharp Question / Philosophical / Analytical / Humorous]
 Confidence: [0-100]
 ---
-[reply text - no character limit, as expressive as needed]
+[reply text - max 280 characters. Be expressive but tight. Every word must earn its place.]
 
 REPLY 2
 Style: [style]
@@ -329,6 +330,9 @@ function ReplyCard({ reply, tweet, author, onApprove, onSent, index }) {
         <ConfBadge score={reply.confidence} />
       </div>
       <div style={{ fontSize: "0.91rem", lineHeight: 1.8, color: "#ddddf0", fontFamily: "Outfit, sans-serif", marginBottom: 14 }}>{reply.text}</div>
+      <div style={{ fontSize: "0.62rem", fontFamily: "JetBrains Mono, monospace", color: reply.text.length > 280 ? "#ef4444" : reply.text.length > 240 ? "#f97316" : G.muted, marginBottom: 10 }}>
+        {reply.text.length}/280 chars {reply.text.length > 280 ? "- OVER LIMIT, trim before posting" : ""}
+      </div>
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
         <button onClick={copy} style={{ padding: "6px 12px", borderRadius: 8, border: `1px solid ${G.border}`, background: "transparent", color: copied ? "#22c55e" : G.muted, fontFamily: "Outfit, sans-serif", fontSize: "0.68rem", fontWeight: 600, cursor: "pointer" }}>
           {copied ? "Copied" : "Copy"}

@@ -44,7 +44,7 @@ REPLY RULES:
 - No hashtags. No emojis unless they fit sharply and naturally.
 - Make the author want to respond or quote tweet.
 - Include a confidence score (0-100) on how well the reply fits Fredrick's voice.
-- Be expressive. If the idea needs more lines, use them.
+- HARD LIMIT: Every reply must be 280 characters or under. X will reject anything over this. Be expressive but tight - every word must earn its place. If a draft is over 280, cut it without losing sharpness.
 
 OUTPUT: Write ONLY the requested content. No preamble. Start directly.`,
           },
